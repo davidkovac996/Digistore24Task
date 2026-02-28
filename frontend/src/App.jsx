@@ -19,12 +19,17 @@ import ContactPage     from './pages/ContactPage';
 import MyMessagesPage from './pages/MyMessagesPage';
 
 function AppRoutes() {
+  const { user, loading, isGuest } = useAuth();
+
   return (
     <>
       <Navbar />
       <Routes>
         {/* Public */}
-        <Route path="/"         element={<HomePage />} />
+        <Route path="/" element={
+          loading ? null :
+          (!user && !isGuest ? <Navigate to="/login" replace /> : <HomePage />)
+        } />
         <Route path="/login"    element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/contact"  element={<ContactPage />} />
