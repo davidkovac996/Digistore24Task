@@ -92,12 +92,13 @@ Digistore24Task/
 
 ## Default Credentials
 
-| Role   | Email                | Password   |
-|--------|----------------------|------------|
-| Admin  | admin@brewedtrue.com | Admin1234! |
+| Role   | Email                    | Password   |
+|--------|--------------------------|------------|
+| Admin  | admin@brewedtrue.com     | Admin1234! |
 | Client | davidkovac1996@gmail.com | David1234! |
+| Client | sarakovac1998@gmail.com  | Sara1234!  |
 
-Register any new account to receive the **Client** role automatically.
+These accounts are pre-seeded with orders, reviews, and messages so you can explore all features immediately. You can also register any new account to receive the **Client** role automatically.
 
 ---
 
