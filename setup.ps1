@@ -61,7 +61,15 @@ function Install-Node {
         Refresh-Path
     }
 
-    # Verify it actually works in this session
+    # Winget may not update the current session's PATH — probe known install locations manually
+    Refresh-Path
+    foreach ($np in @("$env:ProgramFiles\nodejs", "${env:ProgramFiles(x86)}\nodejs")) {
+        if (Test-Path "$np\node.exe") {
+            $env:PATH += ";$np"
+            break
+        }
+    }
+
     $node = Get-Command node -ErrorAction SilentlyContinue
     if (-not $node) {
         Print-Error "Node.js was installed but 'node' is not in PATH yet."
