@@ -43,7 +43,7 @@ function Install-Node {
     $winget = Get-Command winget -ErrorAction SilentlyContinue
     if ($winget) {
         Print-Step "Installing Node.js via winget..."
-        winget install --id OpenJS.NodeJS.LTS --accept-source-agreements --accept-package-agreements --silent
+        winget install --id OpenJS.NodeJS.LTS --source winget --accept-source-agreements --accept-package-agreements --silent
         Refresh-Path
     } else {
         Print-Warning "Node.js not found. Downloading installer..."
