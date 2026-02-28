@@ -74,8 +74,10 @@ export default function Navbar() {
         </Link>
 
         <div className="navbar-links">
-          <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
-          {!isGuest && (!user || user.role !== 'admin') && (
+          {(user || isGuest) && (
+            <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
+          )}
+          {user && user.role === 'client' && (
             <Link to="/contact" className={`nav-link ${isActive('/contact') ? 'active' : ''}`}>Contact</Link>
           )}
 
@@ -141,12 +143,6 @@ export default function Navbar() {
             </>
           )}
 
-          {!user && !isGuest && (
-            <>
-              <Link to="/login" className="nav-link">Login</Link>
-              <Link to="/register" className="btn btn-primary btn-sm">Register</Link>
-            </>
-          )}
         </div>
       </div>
     </nav>
