@@ -54,6 +54,12 @@ export default function AdminMessagesPage() {
 
   const unread = messages.filter(m => !m.is_read).length;
 
+  const markAllRead = () => {
+    api.patch('/contact/admin/mark-all-read').catch(() => {});
+    setMessages(prev => prev.map(m => ({ ...m, is_read: true })));
+    window.dispatchEvent(new CustomEvent('admin-messages-read'));
+  };
+
   return (
     <div className="page">
       <div className="admin-header">
@@ -63,6 +69,11 @@ export default function AdminMessagesPage() {
             {messages.length} total{unread > 0 && <> · <span style={{ color: 'var(--caramel)', fontWeight: 600 }}>{unread} unread</span></>}
           </p>
         </div>
+        {unread > 0 && (
+          <button className="btn btn-ghost" onClick={markAllRead}>
+            Mark all as read
+          </button>
+        )}
       </div>
 
       {loading ? (

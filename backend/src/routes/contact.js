@@ -100,6 +100,18 @@ router.patch('/mine/:id/seen', authenticate, async (req, res) => {
   }
 });
 
+// ── PATCH /api/contact/admin/mark-all-read ───────────────────
+// Admin — marks all messages as read
+router.patch('/admin/mark-all-read', authenticate, requireAdmin, async (req, res) => {
+  try {
+    await db.query(`UPDATE contact_messages SET is_read = TRUE WHERE is_read = FALSE`);
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+});
+
 // ── GET /api/contact/admin ────────────────────────────────────
 // Admin — list all messages, newest first
 router.get('/admin', authenticate, requireAdmin, async (req, res) => {

@@ -23,7 +23,9 @@ export default function Navbar() {
         .catch(() => {});
     fetchUnread();
     const interval = setInterval(fetchUnread, 60_000);
-    return () => clearInterval(interval);
+    const handler = () => setUnreadMessages(0);
+    window.addEventListener('admin-messages-read', handler);
+    return () => { clearInterval(interval); window.removeEventListener('admin-messages-read', handler); };
   }, [user]);
 
   useEffect(() => {
