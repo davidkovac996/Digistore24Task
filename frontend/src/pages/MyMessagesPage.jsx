@@ -29,12 +29,14 @@ export default function MyMessagesPage() {
     if (msg.reply && !msg.reply_seen_by_client) {
       api.patch(`/contact/mine/${msg.id}/seen`).catch(() => {});
       setMessages(prev => prev.map(m => m.id === msg.id ? { ...m, reply_seen_by_client: true } : m));
+      window.dispatchEvent(new CustomEvent('replies-seen', { detail: { all: false } }));
     }
   };
 
   const markAllSeen = () => {
     api.patch('/contact/mine/mark-all-seen').catch(() => {});
     setMessages(prev => prev.map(m => ({ ...m, reply_seen_by_client: true })));
+    window.dispatchEvent(new CustomEvent('replies-seen', { detail: { all: true } }));
   };
 
   if (loading) {

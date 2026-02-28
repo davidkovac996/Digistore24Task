@@ -58,6 +58,20 @@ export default function Navbar() {
     setNewRepliesCount(repliedIds.length);
   }, [repliedIds, pathname, user]);
 
+  useEffect(() => {
+    if (!user || user.role !== 'client') return;
+    const handler = (e) => {
+      if (e.detail?.all) {
+        setNewRepliesCount(0);
+        setRepliedIds([]);
+      } else {
+        setNewRepliesCount(prev => Math.max(0, prev - 1));
+      }
+    };
+    window.addEventListener('replies-seen', handler);
+    return () => window.removeEventListener('replies-seen', handler);
+  }, [user]);
+
   const handleLogout = async () => {
     await logout();
     navigate('/login');
