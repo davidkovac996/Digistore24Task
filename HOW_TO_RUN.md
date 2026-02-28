@@ -17,6 +17,7 @@ Use the automated setup script. It will install Node.js and PostgreSQL automatic
 ```bash
 git clone https://github.com/davidkovac996/Digistore24Task.git
 ```
+**1.1 Or just download it as a ZIP**
 
 **2. Run the setup script**
 
@@ -58,6 +59,8 @@ It is possible to enter as a guest when user can shop and review home page.
 No messages, orders history, contact forms and reviews.
 
 Feel free to register you client account by using register form.
+
+To make testing easier, I added some sample database entries to the repo so you can try it out immediately.
 ---
 
 ## Stopping the app
