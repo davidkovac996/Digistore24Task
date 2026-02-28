@@ -1,0 +1,88 @@
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 2rem;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .checkout-layout { grid-template-columns: 1fr; }
+}
+
+.checkout-section { padding: 1.75rem; }
+.checkout-section h3 {
+  font-size: 1.4rem; color: var(--espresso);
+}
+
+.promo-row { display: flex; gap: 0.75rem; }
+
+/* Order summary */
+.order-summary {
+  padding: 1.75rem;
+  position: sticky; top: 80px;
+}
+
+.summary-line {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.5rem 0; font-size: 0.9rem;
+  border-bottom: 1px solid var(--latte);
+}
+.summary-line:last-of-type { border-bottom: none; }
+.summary-line-name {
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 200px;
+}
+.summary-final {
+  font-size: 1.1rem !important; font-weight: 700;
+  border-top: 2px solid var(--latte) !important;
+  border-bottom: none !important;
+  margin-top: 0.35rem; padding-top: 0.75rem !important;
+}
+
+/* Payment options */
+.payment-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+@media (max-width: 480px) {
+  .payment-options { grid-template-columns: 1fr; }
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.1rem;
+  border: 2px solid var(--latte);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s;
+  user-select: none;
+}
+.payment-option:hover {
+  border-color: var(--dust);
+}
+.payment-option.selected {
+  border-color: var(--caramel);
+  background: var(--cream);
+}
+.payment-option input[type="radio"] {
+  accent-color: var(--caramel);
+  width: 16px; height: 16px;
+  flex-shrink: 0;
+}
+.payment-option-icon { font-size: 1.4rem; }
+.payment-option-label { font-weight: 600; font-size: 0.95rem; }
+
+/* Card fields */
+.card-fields {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--latte);
+  animation: fadeSlideDown 0.2s ease;
+}
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

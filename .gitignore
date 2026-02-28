@@ -1,0 +1,32 @@
+# ── Dependencies ──────────────────────────────────────────────
+node_modules/
+
+# ── Environment / Secrets ─────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── Build Output ──────────────────────────────────────────────
+frontend/dist/
+frontend/.vite/
+
+# ── Logs ──────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+
+# ── OS / Editor ───────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.suo
+*.user
+
+# ── Claude Code ───────────────────────────────────────────────
+.claude/
+
+# ── Misc ──────────────────────────────────────────────────────
+*.tgz
+.npm

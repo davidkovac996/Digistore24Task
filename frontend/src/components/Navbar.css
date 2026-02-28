@@ -1,0 +1,86 @@
+.navbar {
+  background: var(--espresso);
+  position: sticky; top: 0; z-index: 200;
+  border-bottom: 1px solid rgba(196,124,43,0.2);
+  box-shadow: 0 2px 16px rgba(30,15,6,0.35);
+}
+
+.navbar-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+/* Logo */
+.navbar-logo {
+  display: flex; align-items: center; gap: 0.6rem;
+  text-decoration: none;
+  color: var(--caramel);
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: color 0.15s;
+}
+.navbar-logo:hover { color: var(--gold); }
+.logo-icon { font-size: 1.3rem; }
+.logo-text em { font-style: italic; }
+
+/* Links */
+.navbar-links {
+  display: flex; align-items: center; gap: 0.25rem;
+}
+
+.nav-link {
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem; font-weight: 400;
+  color: rgba(245,237,214,0.7);
+  text-decoration: none;
+  transition: all 0.15s;
+  letter-spacing: 0.2px;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--caramel);
+  background: rgba(196,124,43,0.1);
+}
+.nav-link.active { font-weight: 500; }
+
+/* Bag link */
+.nav-bag {
+  display: flex; align-items: center; gap: 0.3rem;
+  background: rgba(196,124,43,0.15);
+  color: var(--latte) !important;
+}
+.nav-bag:hover, .nav-bag.active {
+  background: var(--caramel) !important;
+  color: var(--espresso) !important;
+}
+
+.bag-badge {
+  background: var(--red);
+  color: white;
+  border-radius: 50%;
+  width: 18px; height: 18px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.65rem; font-weight: 700;
+}
+
+/* Messages link with badge */
+.nav-messages {
+  display: flex; align-items: center; gap: 0.4rem;
+}
+
+/* User area */
+.nav-user {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding-left: 0.75rem;
+  border-left: 1px solid rgba(196,124,43,0.2);
+  margin-left: 0.5rem;
+}
+.nav-email {
+  font-size: 0.8rem; color: rgba(245,237,214,0.5);
+  max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}

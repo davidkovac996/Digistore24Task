@@ -1,0 +1,154 @@
+/* ── Tabs ─────────────────────────────────────────────────── */
+.admin-tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--latte);
+  padding-bottom: 0;
+}
+.admin-tab {
+  background: none;
+  border: none;
+  padding: 0.65rem 1.4rem;
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--smoke);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.admin-tab:hover { color: var(--espresso); }
+.admin-tab.active { color: var(--caramel); border-bottom-color: var(--caramel); }
+
+/* ── Messages ─────────────────────────────────────────────── */
+.msg-list { overflow: hidden; }
+.msg-row {
+  display: grid;
+  grid-template-columns: 20px 220px 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid var(--latte);
+  cursor: pointer;
+  transition: background 0.15s;
+  font-size: 0.9rem;
+}
+.msg-row:last-child { border-bottom: none; }
+.msg-row:hover { background: var(--cream); }
+.msg-unread { background: var(--foam); }
+.msg-unread .msg-subject { font-weight: 600; color: var(--espresso); }
+
+.msg-dot-wrap { display: flex; justify-content: center; }
+.msg-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--caramel);
+  flex-shrink: 0;
+}
+.msg-from { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.msg-name { font-weight: 600; font-size: 0.88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.msg-email { font-size: 0.78rem; color: var(--dust); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.msg-subject { color: var(--smoke); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.msg-meta { display: flex; align-items: center; gap: 0.6rem; white-space: nowrap; }
+.msg-date { font-size: 0.78rem; color: var(--dust); }
+.msg-badge { font-size: 0.72rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 20px; }
+.msg-badge-replied { background: #e8f5ee; color: var(--green); }
+
+.msg-modal { max-width: 600px; }
+.msg-body-box {
+  background: var(--foam);
+  border: 1px solid var(--latte);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--smoke);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 220px;
+  overflow-y: auto;
+  margin: 1rem 0;
+}
+.msg-existing-reply {
+  background: var(--cream);
+  border-left: 3px solid var(--caramel);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.5rem;
+}
+.msg-existing-reply-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--caramel);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.msg-existing-reply p {
+  font-size: 0.88rem;
+  color: var(--smoke);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.msg-reply-textarea {
+  resize: vertical;
+  min-height: 90px;
+  font-family: var(--font-body);
+}
+
+@media (max-width: 700px) {
+  .msg-row { grid-template-columns: 20px 1fr auto; }
+  .msg-subject { display: none; }
+}
+
+.admin-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 2.5rem;
+}
+
+.admin-table-wrap { overflow-x: auto; }
+
+.admin-table {
+  width: 100%; border-collapse: collapse;
+}
+.admin-table th {
+  text-align: left; padding: 0.85rem 1.25rem;
+  background: var(--espresso); color: var(--latte);
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.8px;
+  font-weight: 500;
+}
+.admin-table th:first-child { border-radius: 12px 0 0 0; }
+.admin-table th:last-child  { border-radius: 0 12px 0 0; }
+
+.admin-table td {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--latte);
+  font-size: 0.9rem; vertical-align: middle;
+}
+.admin-table tr:last-child td { border-bottom: none; }
+.admin-table tr:hover td { background: var(--cream); }
+
+.admin-product-thumb {
+  width: 52px; height: 52px;
+  object-fit: cover; border-radius: var(--radius-sm);
+  background: var(--latte);
+}
+.admin-product-name { font-weight: 600; }
+
+.stock-pill {
+  display: inline-block; padding: 0.25rem 0.7rem;
+  border-radius: 20px; font-size: 0.78rem; font-weight: 600;
+}
+.stock-ok   { background: #e8f5ee; color: var(--green); }
+.stock-low  { background: #fef3e2; color: var(--orange); }
+.stock-zero { background: #fdecea; color: var(--red); }
+
+.admin-actions { display: flex; gap: 0.5rem; }
+
+.modal-footer {
+  display: flex; justify-content: flex-end; gap: 0.75rem;
+  margin-top: 1.5rem;
+}
