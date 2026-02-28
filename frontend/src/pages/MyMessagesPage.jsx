@@ -32,6 +32,11 @@ export default function MyMessagesPage() {
     }
   };
 
+  const markAllSeen = () => {
+    api.patch('/contact/mine/mark-all-seen').catch(() => {});
+    setMessages(prev => prev.map(m => ({ ...m, reply_seen_by_client: true })));
+  };
+
   if (loading) {
     return (
       <div className="page" style={{ display: 'flex', justifyContent: 'center', paddingTop: '4rem' }}>
@@ -47,7 +52,12 @@ export default function MyMessagesPage() {
         <p className="page-subtitle">{messages.length} message{messages.length !== 1 ? 's' : ''} sent</p>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1.25rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginBottom: '1.25rem' }}>
+        {messages.some(m => m.reply && !m.reply_seen_by_client) && (
+          <button className="btn btn-ghost" onClick={markAllSeen}>
+            Mark all as read
+          </button>
+        )}
         <button className="btn btn-primary" onClick={() => navigate('/contact')}>
           + New Message
         </button>

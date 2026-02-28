@@ -408,6 +408,26 @@ async function seedMessages() {
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 
+// Runs unconditionally — ensures demo messages are always marked as seen
+// even on machines that had the old seed data before reply_seen_by_client existed
+async function markDemoMessagesAsSeen() {
+  const demoIds = [
+    '3ad01ce9-16cf-4fee-8472-8015293ff726',
+    'e4795048-e53a-46c8-a9dd-d5a4ea3b6caa',
+    '6208bf81-6088-4948-9a63-bc9cb3e6b99f',
+    '69f040d4-cc1e-433b-bd71-a065fe82b39d',
+    '8e9ce99b-dd4f-46e4-b617-794486052b71',
+    '7d81a4a3-9dd5-4ce5-8cb5-72047d6a655a',
+    '96709b92-4304-4102-af3e-d7b857ba1278',
+    'd986d6e7-3f9f-4d9b-9878-f8f4d4c1c604',
+  ];
+  await query(
+    `UPDATE contact_messages SET reply_seen_by_client = TRUE WHERE id = ANY($1)`,
+    [demoIds]
+  );
+  console.log('✅ Demo messages marked as seen');
+}
+
 async function main() {
   console.log('🌱 Starting seed...');
   try {
@@ -417,6 +437,7 @@ async function main() {
     await seedOrders();
     await seedReviews();
     await seedMessages();
+    await markDemoMessagesAsSeen();
     console.log('🎉 Seed complete!');
   } catch (err) {
     console.error('❌ Seed failed:', err);

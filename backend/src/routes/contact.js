@@ -66,6 +66,23 @@ router.get('/mine', authenticate, async (req, res) => {
   }
 });
 
+// ── PATCH /api/contact/mine/mark-all-seen ────────────────────
+// Authenticated — marks all replied messages as seen by the client
+router.patch('/mine/mark-all-seen', authenticate, async (req, res) => {
+  try {
+    await db.query(
+      `UPDATE contact_messages
+       SET reply_seen_by_client = TRUE
+       WHERE email = $1 AND reply IS NOT NULL`,
+      [req.user.email]
+    );
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+});
+
 // ── PATCH /api/contact/mine/:id/seen ─────────────────────────
 // Authenticated — marks a reply as seen by the client
 router.patch('/mine/:id/seen', authenticate, async (req, res) => {
