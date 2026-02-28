@@ -14,34 +14,21 @@ function formatDate(iso) {
 
 export default function MyMessagesPage() {
   const { user } = useAuth();
-  const storageKey = `seenReplyIds_${user.id}`;
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(null);
-  // IDs of messages that had unread replies at the moment this page loaded
-  const [newReplyIds, setNewReplyIds] = useState(new Set());
   const navigate = useNavigate();
 
   useEffect(() => {
-    api.get('/contact/mine').then(r => {
-      const fetched = r.data.messages;
-      setMessages(fetched);
-      // Only read localStorage here — never write on mount (avoids React StrictMode double-invoke bug)
-      const seen = new Set(JSON.parse(localStorage.getItem(storageKey) || '[]'));
-      setNewReplyIds(new Set(fetched.filter(m => m.reply && !seen.has(m.id)).map(m => m.id)));
-    }).finally(() => setLoading(false));
+    api.get('/contact/mine').then(r => setMessages(r.data.messages))
+      .finally(() => setLoading(false));
   }, []);
 
   const openMessage = (msg) => {
     setOpen(msg);
-    if (newReplyIds.has(msg.id)) {
-      // Mark as seen in localStorage only when the user actually opens the message
-      const seen = new Set(JSON.parse(localStorage.getItem(storageKey) || '[]'));
-      seen.add(msg.id);
-      localStorage.setItem(storageKey, JSON.stringify([...seen]));
-      const updated = new Set(newReplyIds);
-      updated.delete(msg.id);
-      setNewReplyIds(updated);
+    if (msg.reply && !msg.reply_seen_by_client) {
+      api.patch(`/contact/mine/${msg.id}/seen`).catch(() => {});
+      setMessages(prev => prev.map(m => m.id === msg.id ? { ...m, reply_seen_by_client: true } : m));
     }
   };
 
@@ -78,7 +65,7 @@ export default function MyMessagesPage() {
       ) : (
         <div className="msg-list msg-list-client card">
           {messages.map(msg => {
-            const hasUnreadReply = newReplyIds.has(msg.id);
+            const hasUnreadReply = msg.reply && !msg.reply_seen_by_client;
             return (
               <div
                 key={msg.id}

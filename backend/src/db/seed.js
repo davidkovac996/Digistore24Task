@@ -397,9 +397,9 @@ async function seedMessages() {
   for (const m of messages) {
     await query(
       `INSERT INTO contact_messages
-         (id, name, email, subject, body, is_read, reply, replied_at, created_at)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
-      [m.id, m.name, m.email, m.subject, m.body, m.is_read, m.reply, m.replied_at, m.created_at]
+         (id, name, email, subject, body, is_read, reply, replied_at, created_at, reply_seen_by_client)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
+      [m.id, m.name, m.email, m.subject, m.body, m.is_read, m.reply, m.replied_at, m.created_at, true]
     );
   }
 

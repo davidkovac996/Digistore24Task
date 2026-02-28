@@ -33,11 +33,12 @@ router.post(
 );
 
 // ── GET /api/contact/mine/replied-ids ────────────────────────
-// Authenticated — IDs of the user's messages that have a reply (for navbar badge)
+// Authenticated — IDs of the user's messages with an unseen reply (for navbar badge)
 router.get('/mine/replied-ids', authenticate, async (req, res) => {
   try {
     const { rows } = await db.query(
-      `SELECT id FROM contact_messages WHERE email = $1 AND reply IS NOT NULL`,
+      `SELECT id FROM contact_messages
+       WHERE email = $1 AND reply IS NOT NULL AND reply_seen_by_client = FALSE`,
       [req.user.email]
     );
     res.json({ ids: rows.map(r => r.id) });
@@ -52,13 +53,30 @@ router.get('/mine/replied-ids', authenticate, async (req, res) => {
 router.get('/mine', authenticate, async (req, res) => {
   try {
     const { rows } = await db.query(
-      `SELECT id, name, subject, body, reply, replied_at, created_at
+      `SELECT id, name, subject, body, reply, replied_at, created_at, reply_seen_by_client
        FROM contact_messages
        WHERE email = $1
        ORDER BY created_at DESC`,
       [req.user.email]
     );
     res.json({ messages: rows });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+});
+
+// ── PATCH /api/contact/mine/:id/seen ─────────────────────────
+// Authenticated — marks a reply as seen by the client
+router.patch('/mine/:id/seen', authenticate, async (req, res) => {
+  try {
+    await db.query(
+      `UPDATE contact_messages
+       SET reply_seen_by_client = TRUE
+       WHERE id = $1 AND email = $2`,
+      [req.params.id, req.user.email]
+    );
+    res.json({ success: true });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal server error.' });

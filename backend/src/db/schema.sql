@@ -93,6 +93,7 @@ CREATE TABLE IF NOT EXISTS contact_messages (
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS is_read BOOLEAN NOT NULL DEFAULT FALSE;
 ALTER TABLE orders ALTER COLUMN user_id DROP NOT NULL;
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS is_guest BOOLEAN NOT NULL DEFAULT FALSE;
+ALTER TABLE contact_messages ADD COLUMN IF NOT EXISTS reply_seen_by_client BOOLEAN NOT NULL DEFAULT FALSE;
 
 -- ── Indexes ──────────────────────────────────────────────────
 CREATE INDEX IF NOT EXISTS idx_orders_user_id ON orders(user_id);

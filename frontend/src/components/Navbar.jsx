@@ -55,8 +55,7 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!user || user.role !== 'client') return;
-    const seen = new Set(JSON.parse(localStorage.getItem(`seenReplyIds_${user.id}`) || '[]'));
-    setNewRepliesCount(repliedIds.filter(id => !seen.has(id)).length);
+    setNewRepliesCount(repliedIds.length);
   }, [repliedIds, pathname, user]);
 
   const handleLogout = async () => {
