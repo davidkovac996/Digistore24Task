@@ -118,7 +118,7 @@ Apply **`DIGISTORE24`** (case-insensitive) at checkout for a **10% discount**.
 | `/contact`          | Public + Client     | Contact form (hidden from admin + guest) |
 | `/shop`             | Client + **Guest**  | Browse products, add to cart             |
 | `/bag`              | Client + **Guest**  | View cart, adjust quantities             |
-| `/checkout`         | Client + **Guest**  | Delivery info, promo code, place order   |
+| `/checkout`         | Client + **Guest**  | Delivery info, promo code, product recommendation, place order |
 | `/history`          | Client              | Past orders with itemised detail view    |
 | `/messages`         | Client              | View sent messages + admin replies       |
 | `/admin`            | Admin               | Product inventory CRUD                   |

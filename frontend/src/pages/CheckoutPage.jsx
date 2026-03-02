@@ -39,7 +39,7 @@ function validateCard(card) {
 }
 
 export default function CheckoutPage() {
-  const { items, clearBag } = useBag();
+  const { items, clearBag, addItem } = useBag();
   const { isGuest } = useAuth();
   const navigate = useNavigate();
   const [orderSuccess, setOrderSuccess] = useState(false);
@@ -79,6 +79,11 @@ export default function CheckoutPage() {
       setPromoError('Invalid promo code. Try DIGISTORE24.');
     }
   };
+
+  const cartProductIds = new Set(items.map((i) => i.productId));
+  const suggestedProduct = Object.values(products).find(
+    (p) => !cartProductIds.has(p.id) && p.quantity > 0
+  ) || null;
 
   const subtotal = items.reduce((sum, item) => {
     const p = products[item.productId];
@@ -166,6 +171,33 @@ export default function CheckoutPage() {
       </div>
 
       {error && <div className="alert alert-error">{error}</div>}
+
+      {suggestedProduct && (
+        <div className="recommendation-card card">
+          <div className="recommendation-tag">☕ Before you check out…</div>
+          <div className="recommendation-body">
+            <img
+              src={suggestedProduct.image_url}
+              alt={suggestedProduct.name}
+              className="recommendation-img"
+              onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=120&q=80'; }}
+            />
+            <div className="recommendation-info">
+              <div className="recommendation-name">{suggestedProduct.name}</div>
+              <p className="recommendation-pitch">
+                Customers who try this one never go back — a rich, smooth roast that turns a good order into a great one. Add it and taste the difference!
+              </p>
+              <div className="recommendation-meta">{suggestedProduct.weight_grams}g pack · {formatPrice(suggestedProduct.price_cents)}</div>
+            </div>
+            <button
+              className="btn btn-secondary recommendation-btn"
+              onClick={() => addItem(suggestedProduct.id, 1, suggestedProduct.quantity)}
+            >
+              + Add to Bag
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="checkout-layout">
         {/* Left: form */}

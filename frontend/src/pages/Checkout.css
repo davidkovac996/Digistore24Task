@@ -75,6 +75,63 @@
 .payment-option-icon { font-size: 1.4rem; }
 .payment-option-label { font-weight: 600; font-size: 0.95rem; }
 
+/* Product recommendation */
+.recommendation-card {
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid var(--caramel);
+  background: var(--cream);
+}
+.recommendation-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--caramel);
+  margin-bottom: 0.9rem;
+}
+.recommendation-body {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.recommendation-img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+.recommendation-info {
+  flex: 1;
+  min-width: 0;
+}
+.recommendation-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--espresso);
+  margin-bottom: 0.25rem;
+}
+.recommendation-pitch {
+  font-size: 0.85rem;
+  color: var(--smoke);
+  margin: 0 0 0.35rem;
+  line-height: 1.45;
+}
+.recommendation-meta {
+  font-size: 0.82rem;
+  color: var(--caramel);
+  font-weight: 600;
+}
+.recommendation-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+@media (max-width: 600px) {
+  .recommendation-body { flex-wrap: wrap; }
+  .recommendation-btn { width: 100%; }
+}
+
 /* Card fields */
 .card-fields {
   margin-top: 1.25rem;

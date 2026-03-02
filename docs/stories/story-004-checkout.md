@@ -56,6 +56,14 @@ Guest orders use `POST /api/orders/guest` (no auth middleware). The `user_id` co
   - `placeOrder()` — calls the appropriate endpoint (`/orders` or `/orders/guest`); handles 409 (out of stock) with named products in error message
   - On success: client → navigate to `/history`; guest → `setOrderSuccess(true)` → show confirmation screen
 
+- [x] Checkout product recommendation banner (`CheckoutPage.jsx`)
+  - Derives `suggestedProduct` inline: first in-stock product whose ID is not in the current cart
+  - Renders a full-width card above the checkout layout with product image, name, weight, price, and motivational copy
+  - `addItem(id, 1, maxQty)` from `BagContext` adds it to the cart; the card disappears automatically because the product is now in `cartProductIds`
+  - No additional API call — reuses the product map already fetched on mount
+  - Falls back to a default image via `onError` if the product's `image_url` fails to load
+  - Responsive: wraps to a vertical layout on narrow screens
+
 - [x] `App.jsx` — `/checkout` route has `allowGuest` on `ProtectedRoute`
 
 ---
@@ -73,6 +81,9 @@ Guest orders use `POST /api/orders/guest` (no auth middleware). The `user_id` co
 | Guest sees confirmation, not /history | ✓ (`orderSuccess` state) |
 | Order items store price/name/weight snapshots | ✓ |
 | Cart cleared after success | ✓ (`clearBag()`) |
+| Recommendation shown for in-stock products not in cart | ✓ (derived inline, no extra fetch) |
+| Recommendation hidden when all products are in cart | ✓ (`suggestedProduct` is `null`) |
+| Add from recommendation respects stock limit | ✓ (`addItem(id, 1, p.quantity)`) |
 
 ---
 

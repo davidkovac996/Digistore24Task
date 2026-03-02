@@ -220,7 +220,19 @@ This PRD translates the Product Brief into concrete, implementable requirements 
 - The applied state is locked (input disabled, button shows ✓ Applied) once valid.
 - The promo code is re-validated on the server; a client cannot forge a discount.
 
-### Story 5.4 — Place Order
+### Story 5.4 — Checkout Product Recommendation
+
+> As a **shopper**, I want to see a suggestion for a coffee I have not yet added to my cart so that I can discover products I might enjoy and complete a better order.
+
+**Acceptance Criteria:**
+- When the checkout page loads, a recommendation banner is displayed above the order form if at least one in-stock product is not already in the cart.
+- The banner shows the product image, name, weight, price, and a short motivational message.
+- A single **+ Add to Bag** button adds one unit of the suggested product to the cart immediately, respecting the stock limit.
+- Once added, the banner disappears (the product is now in the cart). If another eligible product exists, it becomes the new suggestion.
+- If all in-stock products are already in the cart, no banner is shown.
+- The recommendation is computed client-side from the already-fetched product list — no extra API call is required.
+
+### Story 5.5 — Place Order
 
 > As a **shopper**, I want to confirm my order so that the shop prepares and ships it to me.
 

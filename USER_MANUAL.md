@@ -162,6 +162,15 @@ Choose one of two options:
 
 Enter **`DIGISTORE24`** (case-insensitive) and click **Apply** to receive a **10% discount** on the order total. The discounted amount is shown in the Order Summary before placing the order. Shipping is always free.
 
+#### Product Recommendation
+
+At the top of the checkout page you may see a **"Before you check out…"** banner featuring a coffee that is not yet in your cart. This is a personalised suggestion based on what is currently in stock.
+
+- The recommendation shows the product image, name, weight, and price.
+- Click **+ Add to Bag** to add one unit to your order instantly — no need to go back to the shop.
+- The banner disappears automatically once you add the suggested product (it is now in your cart).
+- If all in-stock products are already in your cart, no recommendation is shown.
+
 Click **Place Order** to confirm. If an item has sold out since you added it to your cart, you are informed and the order is not placed until you update your cart.
 
 After a successful order you are taken to your Order History page.
